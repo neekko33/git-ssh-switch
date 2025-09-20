@@ -21,3 +21,8 @@ export function isInvalidHostName(hostname: string | null): boolean {
   if (isInvalidText(hostname)) return true
   return hostname?.trim().endsWith('.github.com') === false
 }
+
+export function isInvalidRepoUrl(url: string | null): boolean {
+  if (isInvalidText(url)) return true
+  return !/^git@.+:.+\/.+\.git$/.test(url as string)
+}

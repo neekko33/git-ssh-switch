@@ -5,14 +5,11 @@ import { spawn, execSync } from 'child_process'
 import { GSS_CONFIG_PATH } from '../utils/preCheck'
 import { select } from '@inquirer/prompts'
 import { GitAccount } from '../types'
+import { isInvalidRepoUrl } from '../utils/validate'
 
 export default async function cloneAction(repository: string, directory: string | undefined, otherArgs: string[]) {
-  if (!repository) {
-    throw new Error('Error: Repository URL is required.')
-  }
-
-  if (!/^git@.+:.+\/.+\.git$/.test(repository)) {
-    throw new Error('Error: Repository URL must be in SSH format (e.g., git@github.com:user/repo.git)')
+  if (isInvalidRepoUrl(repository)) {
+    throw new Error('Error: Invalid repository SSH format.')
   }
 
   const accounts: GitAccount[] = await fs.readJSON(GSS_CONFIG_PATH).catch(() => [])
