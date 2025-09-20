@@ -16,12 +16,20 @@ Read the document here:
 
 - [Add a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui#about-addition-of-ssh-keys-to-your-account)
 
-Then you can install `git-ssh-switch` by following command
+Then you can clone this repo and run following commands
 ```shell
-TODO
+cd git-ssh-switch
+npm install
+npm run build
+npm link
 ```
+Now you can use the `gssw` command.
 
 ## Usage
+
+Before executing any command, the program runs a pre-check that creates a config.json file (~/.gss/config.json) for storing user information, backs up the existing SSH configuration file, and creates a new empty SSH config file (~/.ssh/config) for adding Host entries.
+
+If everything is fine, you will see the message `Pre-checks passed.` in the console.
 
 ### Create a account
 
