@@ -5,6 +5,7 @@ import chalk from 'chalk'
 import addAction from '../commands/add'
 import preCheck from '../utils/preCheck'
 import listAction from '../commands/list'
+import testAction from '../commands/test'
 
 const program = new Command()
 
@@ -38,9 +39,14 @@ program
 program
   .command('ls')
   .description('List all Git SSH configurations')
+  .action(listAction)
+
+program
+  .command('test')
+  .description('Test ssh connection for each account')
   .action(async () => {
     try {
-      await listAction()
+      await testAction()
     } catch (error: Error | any) {
       console.error(chalk.redBright(error.message))
       process.exit(1)

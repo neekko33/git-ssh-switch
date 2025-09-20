@@ -26,13 +26,18 @@ TODO
 ### Create a account
 
 ```shell
-gss add
+gssw add
 ```
 
 ### List all accounts
 
 ```shell
-gss list
+gssw list
 ```
 
+### Test SSH connection
+
+```shell
+gssw test
+```
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "CLI tool to manage and switch multiple Git SSH accounts",
   "bin": {
-    "gss": "./bin/git-ssh-switch.js"
+    "gssw": "./bin/git-ssh-switch.js"
   },
   "keywords": [
     "git",
