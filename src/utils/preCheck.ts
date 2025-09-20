@@ -42,6 +42,7 @@ export default async function preCheck(): Promise<void> {
   if (!fs.existsSync(GSS_CONFIG_PATH)) {
     try {
       await fs.ensureFile(GSS_CONFIG_PATH)
+      await fs.writeJSON(GSS_CONFIG_PATH, [])
       console.log(chalk.greenBright(`Created configuration file at ${GSS_CONFIG_PATH}`))
     } catch {
       throw new Error(`Failed to create configuration file at ${GSS_CONFIG_PATH}`)

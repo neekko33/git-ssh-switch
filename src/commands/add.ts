@@ -1,31 +1,23 @@
 import { input } from '@inquirer/prompts'
 import path from 'path'
+import os from 'os'
+import chalk from 'chalk'
+import fs from 'fs-extra'
+import SSHConfig, { parse, stringify } from 'ssh-config'
+
 import {
   isInvalidText,
   isInvalidEmail,
   isInvalidFilePath,
   isInvalidHostName,
 } from '../utils/validate'
-import os from 'os'
-import chalk from 'chalk'
-import type { GitAccount } from '../types'
-import fs from 'fs-extra'
-import SSHConfig, { parse, stringify } from 'ssh-config'
 import {
   GSS_CONFIG_PATH,
   SSH_CONFIG_PATH,
   GIT_SSH_SWITCH_HEADER,
 } from '../utils/preCheck'
-
-function printAccountInfo(account: GitAccount) {
-  Object.entries(account).forEach(([key, value]) => {
-    console.log(
-      chalk.yellowBright(`${key.charAt(0).toUpperCase() + key.slice(1)}: `),
-      chalk.cyanBright(value)
-    )
-  })
-  console.log('')
-}
+import { printAccountInfo } from '../utils/account'
+import type { GitAccount } from '../types'
 
 async function getAccountInfo(): Promise<GitAccount> {
   const username = await input({
@@ -41,7 +33,7 @@ async function getAccountInfo(): Promise<GitAccount> {
     validate: value => (isInvalidEmail(value) ? 'Invalid email format!' : true),
   })
 
-  const sshKeyPath = await input({
+  const sshKey = await input({
     message: 'Enter the path to your SSH private key (e.g., ~/.ssh/id_rsa):',
     required: true,
     default: path.join(os.homedir(), '.ssh', 'id_rsa'),
@@ -52,8 +44,8 @@ async function getAccountInfo(): Promise<GitAccount> {
         : true,
   })
 
-  const customHost = await input({
-    message: `Enter a custom SSH host name (e.g., ${username}.github.com):`,
+  const host = await input({
+    message: `Enter a custom SSH host (e.g., ${username}.github.com):`,
     required: true,
     default: `${username}.github.com`,
     prefill: 'editable',
@@ -64,8 +56,8 @@ async function getAccountInfo(): Promise<GitAccount> {
   const newAccount: GitAccount = {
     username,
     email,
-    sshKeyPath: sshKeyPath.replace(/^~(?=$|\/|\\)/, os.homedir()),
-    customHost,
+    sshKey: sshKey.replace(/^~(?=$|\/|\\)/, os.homedir()),
+    host,
   }
 
   return newAccount
@@ -100,8 +92,8 @@ async function checkExistingAccount(
     // Remove the existing account
     const index = accounts.findIndex(
       account =>
-        account.sshKeyPath === newAccount.sshKeyPath ||
-        account.customHost === newAccount.customHost
+        account.sshKey === newAccount.sshKey ||
+        account.host === newAccount.host
     )
     if (index !== -1) {
       accounts.splice(index, 1)
@@ -113,7 +105,7 @@ async function checkExistingSshConfig(
   config: SSHConfig,
   newAccount: GitAccount
 ) {
-  const existingHost = config.find({ Host: newAccount.customHost })
+  const existingHost = config.find({ Host: newAccount.host })
   if (existingHost) {
     const confirm = await input({
       message:
@@ -131,7 +123,7 @@ async function checkExistingSshConfig(
       throw new Error('Operation cancelled by user.')
     }
     // Remove the existing host config
-    config.remove({ Host: newAccount.customHost })
+    config.remove({ Host: newAccount.host })
   }
 
   return config
@@ -146,14 +138,17 @@ async function saveAccount(newAccount: GitAccount) {
   const parsedSshConfig = parse(sshConfig)
 
   await checkExistingAccount(accounts, newAccount)
-  const updatedSshConfig = await checkExistingSshConfig(parsedSshConfig, newAccount)
+  const updatedSshConfig = await checkExistingSshConfig(
+    parsedSshConfig,
+    newAccount
+  )
 
   accounts.push(newAccount)
   updatedSshConfig.append({
-    Host: newAccount.customHost,
+    Host: newAccount.host,
     HostName: 'ssh.github.com',
     User: 'git',
-    IdentityFile: newAccount.sshKeyPath,
+    IdentityFile: newAccount.sshKey,
     Port: '443',
   })
 
