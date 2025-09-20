@@ -27,7 +27,7 @@ Now you can use the `gssw` command.
 
 ## Usage
 
-Before executing any command, the program runs a pre-check that creates a config.json file (~/.gss/config.json) for storing user information, backs up the existing SSH configuration file, and creates a new empty SSH config file (~/.ssh/config) for adding Host entries.
+Before executing any command, the program runs a pre-check that creates a config.json file (`~/.gss/config.json`) for storing user information, backs up the existing SSH configuration file, and creates a new empty SSH config file (`~/.ssh/config`) for adding Host entries.
 
 If everything is fine, you will see the message `Pre-checks passed.` in the console.
 
