@@ -22,17 +22,20 @@
   ],
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/bin/git-ssh-switch.js"
+    "start": "node ./dist/bin/git-ssh-switch.js",
+    "dev": "ts-node ./src/bin/git-ssh-switch.ts"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@inquirer/prompts": "^7.8.6",
     "chalk": "^5.6.2",
     "commander": "^14.0.1",
     "fs-extra": "^11.3.2",
-    "inquirer": "^12.9.6"
+    "ssh-config": "^5.0.3"
   }
 }
