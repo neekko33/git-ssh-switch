@@ -11,7 +11,7 @@ import cloneAction from '../commands/clone'
 const program = new Command()
 
 program
-  .name('gss')
+  .name('gssw')
   .description('Git SSH Switch CLI: manage multiple Git accounts')
   .version('0.1.0')
 
