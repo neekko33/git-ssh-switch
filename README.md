@@ -50,3 +50,33 @@ Clone a repository (allowing additional parameters identical to the git command)
 ```shell
 gssw clone <repository> [<directory>]
 ```
+
+### Add remote origin
+
+When adding an origin to an existing local repository, you can choose which user to use.
+
+```shell
+TODO
+```
+
+### Switch local git user
+
+Set the Git user information for the current local repository by selecting the desired account.
+
+```shell
+TODO
+```
+
+### Remove account
+
+```shell
+TODO
+```
+
+### Reset
+
+Delete all files created by git-ssh-switch and restore the latest backup of the SSH config file (if it exists).
+
+```shell
+TODO
+```
