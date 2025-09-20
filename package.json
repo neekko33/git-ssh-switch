@@ -1,0 +1,30 @@
+{
+  "name": "git-ssh-switch",
+  "version": "0.1.0",
+  "description": "CLI tool to manage and switch multiple Git SSH accounts",
+  "bin": {
+    "gss": "./bin/git-ssh-switch.js"
+  },
+  "keywords": [
+    "git",
+    "ssh",
+    "cli",
+    "switch",
+    "account"
+  ],
+  "license": "MIT",
+  "author": "neekko33",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/bin/git-ssh-switch.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2"
+  }
+}
