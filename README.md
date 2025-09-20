@@ -37,7 +37,16 @@ gssw list
 
 ### Test SSH connection
 
+Run `ssh -T` for every account's host.
+
 ```shell
 gssw test
 ```
 
+### Clone a Repo
+
+Clone a repository (allowing additional parameters identical to the git command), select an account, automatically replace the repository URL with the chosen account’s SSH Host, and update the local Git user information in the cloned repository after completion.
+
+```shell
+gssw clone <repository> [<directory>]
+```

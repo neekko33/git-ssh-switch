@@ -6,6 +6,7 @@ import addAction from '../commands/add'
 import preCheck from '../utils/preCheck'
 import listAction from '../commands/list'
 import testAction from '../commands/test'
+import cloneAction from '../commands/clone'
 
 const program = new Command()
 
@@ -47,6 +48,20 @@ program
   .action(async () => {
     try {
       await testAction()
+    } catch (error: Error | any) {
+      console.error(chalk.redBright(error.message))
+      process.exit(1)
+    }
+  })
+
+program
+  .command('clone <repository> [directory]')
+  .description('Clone a repository using selected git account')
+  .allowUnknownOption(true)
+  .action(async (repository: string, directory:string|undefined, options, command) => {
+    const args = command.args.slice(2) // other args after repository and directory
+    try {
+      await cloneAction(repository, directory, args)
     } catch (error: Error | any) {
       console.error(chalk.redBright(error.message))
       process.exit(1)
