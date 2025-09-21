@@ -22,7 +22,7 @@ export async function selectAccount(): Promise<GitAccount> {
   }
 
   const answer = await select({
-    message: 'Select a Git account for cloning:',
+    message: 'Select a Git account:',
     choices: accounts.map(account => {
       return {
         name: account.username,
