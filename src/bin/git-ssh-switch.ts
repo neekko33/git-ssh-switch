@@ -7,11 +7,12 @@ import preCheck from '../utils/preCheck'
 import listAction from '../commands/list'
 import testAction from '../commands/test'
 import cloneAction from '../commands/clone'
+import originAction from '../commands/origin'
 
 const program = new Command()
 
 program
-  .name('gssw')
+  .name('gits')
   .description('Git SSH Switch CLI: manage multiple Git accounts')
   .version('0.1.0')
 
@@ -58,10 +59,22 @@ program
   .command('clone <repository> [directory]')
   .description('Clone a repository using selected git account')
   .allowUnknownOption(true)
-  .action(async (repository: string, directory:string|undefined, options, command) => {
+  .action(async (repository: string, directory: string | undefined, options, command) => {
     const args = command.args.slice(2) // other args after repository and directory
     try {
       await cloneAction(repository, directory, args)
+    } catch (error: Error | any) {
+      console.error(chalk.redBright(error.message))
+      process.exit(1)
+    }
+  })
+
+program
+  .command('origin <repository>')
+  .description('Add a remote origin for the current repository')
+  .action(async (repository: string) => {
+    try {
+      await originAction(repository)
     } catch (error: Error | any) {
       console.error(chalk.redBright(error.message))
       process.exit(1)

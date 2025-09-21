@@ -23,7 +23,7 @@ npm install
 npm run build
 npm link
 ```
-Now you can use the `gssw` command.
+Now you can use the `gits` command.
 
 ## Usage
 
@@ -34,13 +34,13 @@ If everything is fine, you will see the message `Pre-checks passed.` in the cons
 ### Create a account
 
 ```shell
-gssw add
+gits add
 ```
 
 ### List all accounts
 
 ```shell
-gssw list
+gits list
 ```
 
 ### Test SSH connection
@@ -48,7 +48,7 @@ gssw list
 Run `ssh -T` for every account's host.
 
 ```shell
-gssw test
+gits test
 ```
 
 ### Clone a Repo
@@ -56,7 +56,7 @@ gssw test
 Clone a repository (allowing additional parameters identical to the git command), select an account, automatically replace the repository URL with the chosen account’s SSH Host, and update the local Git user information in the cloned repository after completion.
 
 ```shell
-gssw clone <repository> [<directory>]
+gits clone <repository> [<directory>]
 ```
 
 ### Add remote origin
