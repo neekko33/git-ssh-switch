@@ -1,2 +1,26 @@
 node_modules
 dist
+
+# Test coverage and ts-jest build cache
+coverage/
+.tsbuild-jest/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files (keep example files committed)
+.env
+.env.*
+!.env.example
