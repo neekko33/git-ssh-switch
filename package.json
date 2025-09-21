@@ -24,7 +24,8 @@
     "build": "tsc",
     "start": "node ./dist/bin/git-ssh-switch.js",
     "dev": "ts-node ./src/bin/git-ssh-switch.ts",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
