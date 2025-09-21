@@ -78,7 +78,7 @@ gits local
 ### Remove account
 
 ```shell
-TODO
+gits remove
 ```
 
 ### Reset
@@ -86,5 +86,5 @@ TODO
 Delete all files created by git-ssh-switch and restore the latest backup of the SSH config file (if it exists).
 
 ```shell
-TODO
+gits reset
 ```

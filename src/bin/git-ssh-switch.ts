@@ -10,6 +10,7 @@ import cloneAction from '../commands/clone'
 import originAction from '../commands/origin'
 import localAction from '../commands/local'
 import removeAction from '../commands/remove'
+import resetAction from '../commands/reset'
 
 const program = new Command()
 
@@ -101,6 +102,18 @@ program
   .action(async () => {
     try {
       await removeAction()
+    } catch (error: Error | any) {
+      console.error(chalk.redBright(error.message))
+      process.exit(1)
+    }
+  })
+
+program
+  .command('reset')
+  .description('Reset all configurations and restore SSH config file')
+  .action(async () => {
+    try {
+      await resetAction()
     } catch (error: Error | any) {
       console.error(chalk.redBright(error.message))
       process.exit(1)
