@@ -8,6 +8,7 @@ import listAction from '../commands/list'
 import testAction from '../commands/test'
 import cloneAction from '../commands/clone'
 import originAction from '../commands/origin'
+import localAction from '../commands/local'
 
 const program = new Command()
 
@@ -75,6 +76,18 @@ program
   .action(async (repository: string) => {
     try {
       await originAction(repository)
+    } catch (error: Error | any) {
+      console.error(chalk.redBright(error.message))
+      process.exit(1)
+    }
+  })
+
+program
+  .command('local')
+  .description('Set local git user for current repository')
+  .action(async () => {
+    try {
+      await localAction()
     } catch (error: Error | any) {
       console.error(chalk.redBright(error.message))
       process.exit(1)

@@ -61,10 +61,10 @@ gits clone <repository> [<directory>]
 
 ### Add remote origin
 
-When adding an origin to an existing local repository, you can choose which user to use.
+When adding an origin to an existing local repository, you can choose which user to use.The program will remove the existing remote origin (if it exists) and add a new one with the selected account's SSH Host. It also updates the local Git user information in the repository.
 
 ```shell
-TODO
+gits remote <repository>
 ```
 
 ### Switch local git user
@@ -72,7 +72,7 @@ TODO
 Set the Git user information for the current local repository by selecting the desired account.
 
 ```shell
-TODO
+gits local
 ```
 
 ### Remove account
