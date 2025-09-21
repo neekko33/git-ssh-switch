@@ -9,6 +9,7 @@ import testAction from '../commands/test'
 import cloneAction from '../commands/clone'
 import originAction from '../commands/origin'
 import localAction from '../commands/local'
+import removeAction from '../commands/remove'
 
 const program = new Command()
 
@@ -88,6 +89,18 @@ program
   .action(async () => {
     try {
       await localAction()
+    } catch (error: Error | any) {
+      console.error(chalk.redBright(error.message))
+      process.exit(1)
+    }
+  })
+
+program
+  .command('remove')
+  .description('Remove an existing Git SSH configuration')
+  .action(async () => {
+    try {
+      await removeAction()
     } catch (error: Error | any) {
       console.error(chalk.redBright(error.message))
       process.exit(1)

@@ -14,7 +14,6 @@ import {
 import {
   GSS_CONFIG_PATH,
   SSH_CONFIG_PATH,
-  GIT_SSH_SWITCH_HEADER,
 } from '../utils/preCheck'
 import { printAccountInfo } from '../utils/account'
 import type { GitAccount } from '../types'
