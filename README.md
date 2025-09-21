@@ -15,15 +15,11 @@ Read the document here:
 - [Generate new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
 
 - [Add a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui#about-addition-of-ssh-keys-to-your-account)
+## Install
 
-Then you can clone this repo and run following commands
 ```shell
-cd git-ssh-switch
-npm install
-npm run build
-npm link
+npm install -g git-ssh-switch
 ```
-Now you can use the `gits` command.
 
 ## Usage
 
