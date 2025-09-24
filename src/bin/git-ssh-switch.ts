@@ -17,7 +17,7 @@ const program = new Command()
 program
   .name('gits')
   .description('Git SSH Switch CLI: manage multiple Git accounts')
-  .version('0.1.0')
+  .version('0.1.3')
 
 program.hook('preAction', async () => {
   try {
