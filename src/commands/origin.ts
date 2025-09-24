@@ -19,11 +19,16 @@ export default async function originAction(repository: string): Promise<void> {
 
   try {
     execSync('git remote remove origin', { stdio: 'ignore' })
+  } catch {
+    console.log(chalk.yellowBright('No existing remote origin to remove.'))
+  }
+
+  try {
     execSync(`git remote add origin ${sshUrl}`, { stdio: 'inherit' })
     console.log(chalk.greenBright(`Remote origin set to ${sshUrl}`))
   } catch {
     throw new Error('Failed to add remote origin. Please check your Git configuration.')
   }
 
-  await setLocalAccount(selectedAccount, process.cwd())
+  setLocalAccount(selectedAccount, process.cwd())
 }
